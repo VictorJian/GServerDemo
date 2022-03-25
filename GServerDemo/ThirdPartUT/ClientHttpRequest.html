@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VictorSystem API Post Example</title>
+    </head>
+    <body>
+        <form id="form" method="post">
+            <input type="text" id="from_type" placeholder="FromType"/>
+            <input type="text" id="from_id" placeholder="FromId"/>
+            <input type="text" id="from_token" placeholder="FromToken"/>
+            <input type="submit" value="Add Todo"/>
+         </form>
+     </body>
+
+     <script>
+         var form = document.getElementById('form')
+         form.addEventListener('submit', function (e){
+             e.preventDefault()
+             var from_type = document.getElementById('from_type').value
+             var from_id = document.getElementById('from_id').value
+             var from_token = document.getElementById('from_token').value
+             fetch("http://127.0.0.1:8899/register",{
+                 method:'POST',
+                 body:JSON.stringify({
+                     from_type:from_type,
+                     from_id:from_id,
+                     from_token:from_token
+                 }),
+                 headers:{
+                     "Content-Type":"application/json; charset=UTF-8"
+                 }
+             })
+             .then(function (response){
+                 return response.json()
+             })
+             .then(function (data) {
+                 console.log(data)
+             })
+
+         })
+     </script>
+ </html>
